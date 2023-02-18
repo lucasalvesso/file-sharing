@@ -1,15 +1,5 @@
-import {
-  aws_lambda,
-  Duration,
-  RemovalPolicy,
-  Stack,
-  StackProps,
-} from "aws-cdk-lib";
-import * as sns from "aws-cdk-lib/aws-sns";
-import * as subs from "aws-cdk-lib/aws-sns-subscriptions";
-import * as sqs from "aws-cdk-lib/aws-sqs";
+import { aws_dynamodb, aws_lambda, RemovalPolicy, Stack } from "aws-cdk-lib";
 import { Construct } from "constructs";
-import { AttributeType, Table } from "aws-cdk-lib/aws-dynamodb/lib/table";
 import { Effect, Policy, PolicyStatement } from "aws-cdk-lib/aws-iam";
 import { LambdaIntegration, RestApi } from "aws-cdk-lib/aws-apigateway";
 import { MainStackProps } from "./main-stack-props";
@@ -18,11 +8,15 @@ export class MainStack extends Stack {
   constructor(scope: Construct, id: string, props: MainStackProps) {
     super(scope, id, props);
 
-    const accessLinkDynamoDbTable = new Table(this, "access-link", {
-      partitionKey: { name: "id", type: AttributeType.NUMBER },
-      tableName: `access-link-${props.stage}`,
-      removalPolicy: RemovalPolicy.DESTROY,
-    });
+    const accessLinkDynamoDbTable = new aws_dynamodb.Table(
+      this,
+      "access-link",
+      {
+        partitionKey: { name: "id", type: aws_dynamodb.AttributeType.NUMBER },
+        tableName: `access-link-${props.stage}`,
+        removalPolicy: RemovalPolicy.DESTROY,
+      }
+    );
 
     const lambdaDynamoDbPolicy = new Policy(this, "lambda-dynamo-table", {
       policyName: "lambda-dynamo-table",
@@ -36,7 +30,7 @@ export class MainStack extends Stack {
     });
 
     const lambda = new aws_lambda.Function(this, "file-sharing", {
-      code: aws_lambda.Code.fromAsset(".dist/app/"),
+      code: aws_lambda.Code.fromAsset("../app/dist/"),
       handler: "main.handler",
       runtime: aws_lambda.Runtime.NODEJS_14_X,
       environment: {
