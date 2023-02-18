@@ -1,16 +1,22 @@
-import { MainStackProps } from "./main-stack-props";
-import { App, aws_lambda, RemovalPolicy, Stack } from "aws-cdk-lib";
+import {
+  aws_lambda,
+  Duration,
+  RemovalPolicy,
+  Stack,
+  StackProps,
+} from "aws-cdk-lib";
+import * as sns from "aws-cdk-lib/aws-sns";
+import * as subs from "aws-cdk-lib/aws-sns-subscriptions";
+import * as sqs from "aws-cdk-lib/aws-sqs";
+import { Construct } from "constructs";
 import { AttributeType, Table } from "aws-cdk-lib/aws-dynamodb/lib/table";
 import { Effect, Policy, PolicyStatement } from "aws-cdk-lib/aws-iam";
 import { LambdaIntegration, RestApi } from "aws-cdk-lib/aws-apigateway";
+import { MainStackProps } from "./main-stack-props";
 
 export class MainStack extends Stack {
-  constructor(scope: App, id: string, props: MainStackProps) {
+  constructor(scope: Construct, id: string, props: MainStackProps) {
     super(scope, id, props);
-
-    const environment = {
-      STAGE: props.stage,
-    };
 
     const accessLinkDynamoDbTable = new Table(this, "access-link", {
       partitionKey: { name: "id", type: AttributeType.NUMBER },
