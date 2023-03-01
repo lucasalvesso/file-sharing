@@ -1,3 +1,3 @@
-export declare const handler: (event: import("aws-lambda").APIGatewayProxyEvent) => Promise<{
-    statusCode: number;
-}>;
+import { HandlerRouteResponse } from "./infrastcructure/interface/HandlerRouteResponse";
+import { Request } from "express";
+export declare const handler: (event: Request) => Promise<HandlerRouteResponse>;

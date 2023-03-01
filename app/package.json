@@ -5,14 +5,17 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc --project tsconfig.json"
+    "build": "rm -rf dist && tsc --project tsconfig.json"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "aws-lambda": "^1.0.7"
+    "aws-lambda": "^1.0.7",
+    "aws-sdk": "^2.1157.0"
   },
   "devDependencies": {
-    "@types/aws-lambda": "^8.10.89"
+    "@types/aws-lambda": "^8.10.89",
+    "@types/node": "10.17.27",
+    "@types/uuid": "^9.0.1"
   }
 }
