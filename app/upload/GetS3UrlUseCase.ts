@@ -21,6 +21,6 @@ export class GetS3UrlUseCase {
 
     await this.dynamodb.createLink(dynamoDbItem);
 
-    return { url: s3Data.url, key: s3Data.path };
+    return { url: s3Data.url, key: key };
   }
 }
