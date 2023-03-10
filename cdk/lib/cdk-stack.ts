@@ -3,7 +3,7 @@ import { Construct } from "constructs";
 import { Effect, Policy, PolicyStatement } from "aws-cdk-lib/aws-iam";
 import { LambdaIntegration, RestApi } from "aws-cdk-lib/aws-apigateway";
 import { MainStackProps } from "./main-stack-props";
-import { Bucket } from "aws-cdk-lib/aws-s3";
+import { Bucket, HttpMethods } from "aws-cdk-lib/aws-s3";
 
 export class MainStack extends Stack {
   constructor(scope: Construct, id: string, props: MainStackProps) {
@@ -37,6 +37,13 @@ export class MainStack extends Stack {
     const uploadBucket = new Bucket(this, "bucket-" + props.env.stage, {
       bucketName: "filesharing-" + props.env.stage,
       removalPolicy: RemovalPolicy.DESTROY,
+      cors: [
+        {
+          allowedHeaders: ["*"],
+          allowedOrigins: ["http://localhost:8081"],
+          allowedMethods: [HttpMethods.HEAD, HttpMethods.GET, HttpMethods.PUT],
+        },
+      ],
     });
 
     const uploadBucketPolicy = new Policy(this, "lambda-s3-bucket", {
