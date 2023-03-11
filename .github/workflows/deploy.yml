@@ -1,32 +1,28 @@
-name: deploy
+name: Deploy to Github Pages
 on:
   push:
     branches:
       - master
 jobs:
   deploy:
+    name: Deploying to Github Pages
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
         with:
-          node-version: '12'
+          node-version: "12"
+      - name: Install packages
+        run: npm i --prefix frontend
       - name: setup git auth
         env:
-          email: 'lcsalves@hotmail.com'
-          username: 'lucasalvesso'
-          access_token: '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'
+          email: "lcsalves@hotmail.com"
+          username: "lucasalvesso"
+          access_token: "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"
         run: |
           git config --global credential.helper store
           echo "https://${access_token}:x-oauth-basic@github.com" > ~/.git-credentials
           git config --global user.email $email
           git config --global user.name $username
-      - name: deploy to gh-pages
-        run: |
-          npm i --prefix frontend
-          NODE_ENV=production npm run build --prefix frontend
-          cd dist
-          git init
-          git add -A
-          git commit -m "🚀 Deploy id ${GITHUB_RUN_ID}"
-          git push -f "https://github.com/${GITHUB_REPOSITORY}.git" master:gh-pages
+      - name: Deploy
+        run: npm run deploy:frontend
