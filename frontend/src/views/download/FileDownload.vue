@@ -12,7 +12,7 @@ export default {
     };
 
     const fileId = this.$route?.params?.id;
-    fetch(`${window.location.href}/upload/${fileId}`, requestOptions).then(async (res) => {
+    fetch(`${process.env.VUE_APP_BACKEND_URL}/upload/${fileId}`, requestOptions).then(async (res) => {
       const response = await res.json();
       const url = response.content?.url;
 

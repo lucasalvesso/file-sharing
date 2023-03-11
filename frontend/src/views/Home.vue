@@ -31,7 +31,7 @@ export default {
         method: "POST",
         headers: { "Content-Type": "application/json" },
       };
-      fetch("http://localhost:8005/upload", requestOptions).then(async (res) => {
+      fetch(`${process.env.VUE_APP_BACKEND_URL}/upload`, requestOptions).then(async (res) => {
         const response = await res.json();
         const url = response.content?.url;
         this.linkURL = window.location.href + response.content?.key;
