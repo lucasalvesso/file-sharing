@@ -4,10 +4,7 @@ import { Generator } from "../common/Generator";
 import { IAccessLink } from "./table/IAccessLink";
 
 export class GetS3UrlUseCase {
-  public constructor(
-    private dynamodb: AccessLinkDynamoDbTable,
-    private s3Service: AccessLinkBucket
-  ) {}
+  public constructor(private dynamodb: AccessLinkDynamoDbTable, private s3Service: AccessLinkBucket) {}
 
   public async createAccess() {
     const key = Generator.generateShortId();
@@ -17,6 +14,7 @@ export class GetS3UrlUseCase {
     const dynamoDbItem: IAccessLink = {
       id: key,
       path: s3Data.path,
+      ttl: new Date(new Date().setDate(new Date().getDate() + 1)).getTime(),
     };
 
     await this.dynamodb.createLink(dynamoDbItem);

@@ -10,9 +10,7 @@ export class AccessLinkDynamoDbTable extends DynamoDbService {
     return await this.create(item);
   }
 
-  public async findLink(
-    key: IAccessLink["id"]
-  ): Promise<IAccessLink | undefined> {
+  public async findLink(key: IAccessLink["id"]): Promise<IAccessLink | undefined> {
     const object = await this.read({
       id: key,
     });
@@ -21,6 +19,6 @@ export class AccessLinkDynamoDbTable extends DynamoDbService {
       return;
     }
 
-    return object.Item as IAccessLink;
+    return <IAccessLink>object.Item;
   }
 }
