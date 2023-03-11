@@ -8,7 +8,7 @@
     "app": "nodemon server.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "deploy:backend": "npm run build --prefix app && npm run cdk:deploy",
-    "deploy:frontend": "npm run deploy --prefix frontend",
+    "deploy:frontend": "node scripts/gh-pages-deploy.js",
     "cdk:deploy": "npm run deploy --prefix cdk"
   },
   "author": "",
