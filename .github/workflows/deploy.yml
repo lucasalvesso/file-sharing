@@ -13,6 +13,8 @@ jobs:
         with:
           node-version: "12"
       - name: Install packages
+        run: npm i
+      - name: Install packages frontend
         run: npm i --prefix frontend
       - name: setup git auth
         env:
