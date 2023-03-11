@@ -1,12 +1,12 @@
-const execa = require("execa");
-const fs = require("fs");
+import { execa } from "execa";
+import * as fs from "fs";
 
 (async () => {
   try {
     await execa("git", ["checkout", "--orphan", "gh-pages"]);
 
     console.log("Building started...");
-    await execa("npm", ["run", "build"]);
+    await execa("npm", ["run", "build", "--prefix", "frontend"]);
 
     // Understand if it's dist or build folder
     const folderName = fs.existsSync("./frontend/dist") ? "dist" : "build";
