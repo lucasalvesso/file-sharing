@@ -25,8 +25,6 @@ export default {
 
   created() {
     console.log("VUE_APP_BACKEND_URL ", process.env.VUE_APP_BACKEND_URL);
-    console.log("BACKEND_URL ", process.env.BACKEND_URL);
-    console.log("VUE_APP_URL ", process.env.VUE_APP_URL);
   },
 
   methods: {
