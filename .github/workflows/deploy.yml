@@ -19,14 +19,11 @@ jobs:
           email: "lcsalves@hotmail.com"
           username: "lucasalvesso"
           access_token: "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"
+          VUE_APP_BACKEND_URL=${{ secrets.VUE_APP_BACKEND_URL }}
         run: |
           git config --global credential.helper store
           echo "https://${access_token}:x-oauth-basic@github.com" > ~/.git-credentials
           git config --global user.email $email
           git config --global user.name $username
-      - name: create env file
-        run: |
-          touch frontend/.env
-          echo VUE_APP_BACKEND_URL=${{ secrets.VUE_APP_BACKEND_URL }} >> frontend/.env
       - name: Deploy
-        run: VUE_APP_BACKEND_URL=teste npm run deploy:frontend
+        run: VUE_APP_BACKEND_URL=$VUE_APP_BACKEND_URL npm run deploy:frontend
