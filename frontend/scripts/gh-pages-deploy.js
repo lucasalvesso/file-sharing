@@ -1,5 +1,5 @@
-import { execa } from "execa";
-import * as fs from "fs";
+const { execa } = require("execa");
+const { existsSync } = require("fs");
 
 (async () => {
   try {
@@ -10,7 +10,7 @@ import * as fs from "fs";
 
     // Understand if it's dist or build folder
     const folderPath = "./dist";
-    if (!fs.existsSync(folderPath)) {
+    if (!existsSync(folderPath)) {
       process.exit(1);
     }
     await execa("git", ["--work-tree", folderPath, "add", "--all"]);
