@@ -1,6 +1,7 @@
 name: Deploy to Github Pages
+
 env:
-  VUE_APP_BACKEND_URL: "teste"
+  VUE_APP_BACKEND_URL: 'teste'
 
 on:
   push:
