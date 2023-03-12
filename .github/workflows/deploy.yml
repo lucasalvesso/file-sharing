@@ -1,8 +1,12 @@
 name: Deploy to Github Pages
+env:
+  VUE_APP_BACKEND_URL: "teste"
+
 on:
   push:
     branches:
       - master
+
 jobs:
   deploy:
     name: Deploying to Github Pages
@@ -19,7 +23,6 @@ jobs:
           email: "lcsalves@hotmail.com"
           username: "lucasalvesso"
           access_token: "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"
-          VUE_APP_BACKEND_URL: "teste"
         run: |
           git config --global credential.helper store
           echo "https://${access_token}:x-oauth-basic@github.com" > ~/.git-credentials
