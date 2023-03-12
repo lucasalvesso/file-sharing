@@ -27,4 +27,4 @@ jobs:
           git config --global user.email $email
           git config --global user.name $username
       - name: Deploy
-        run: VUE_APP_BACKEND_URL=${{vars.VUE_APP_BACKEND_URL}} npm run deploy:frontend
+        run: VUE_APP_BACKEND_URL=https://19k11m0o9f.execute-api.us-east-2.amazonaws.com/prod npm run deploy:frontend
