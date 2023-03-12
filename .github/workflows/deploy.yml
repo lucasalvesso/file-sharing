@@ -28,4 +28,6 @@ jobs:
       - name: Deploy
         env:
           VUE_APP_BACKEND_URL: ${{ secrets.VUE_APP_BACKEND_URL }}
+          BACKEND_URL: ${{ secrets.BACKEND_URL }}
+          VUE_APP_URL: ${{ secrets.VUE_APP_URL }}
         run: npm run deploy:frontend

@@ -23,6 +23,12 @@ export default {
     linkURL: null,
   }),
 
+  created() {
+    console.log("VUE_APP_BACKEND_URL ", process.env.VUE_APP_BACKEND_URL);
+    console.log("BACKEND_URL ", process.env.BACKEND_URL);
+    console.log("VUE_APP_URL ", process.env.VUE_APP_URL);
+  },
+
   methods: {
     async submit() {
       if (!this.file) return;
