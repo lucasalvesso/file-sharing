@@ -1,5 +1,5 @@
 const execa = require("execa");
-const existsSync = require("fs");
+const fs = require("fs");
 
 (async () => {
   try {
@@ -10,7 +10,7 @@ const existsSync = require("fs");
 
     // Understand if it's dist or build folder
     const folderPath = "./dist";
-    if (!existsSync(folderPath)) {
+    if (!fs.existsSync(folderPath)) {
       process.exit(1);
     }
     await execa("git", ["--work-tree", folderPath, "add", "--all"]);
