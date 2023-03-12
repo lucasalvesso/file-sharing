@@ -27,6 +27,6 @@ jobs:
       - name: create env file
         run: |
           touch frontend/.env
-          echo VUE_APP_BACKEND_URL=${{ secrets.VUE_APP_BACKEND_URL }} >> frontend/.env
+          echo VUE_APP_BACKEND_URL=teste >> frontend/.env
       - name: Deploy
         run: npm run deploy:frontend
