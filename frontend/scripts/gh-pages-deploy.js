@@ -1,5 +1,5 @@
-const { execa } = require("execa");
-const { existsSync } = require("fs");
+const execa = require("execa");
+const existsSync = require("fs");
 
 (async () => {
   try {
