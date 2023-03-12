@@ -3,6 +3,8 @@ const fs = require("fs");
 
 (async () => {
   try {
+    const variable = process.env.VUE_APP_BACKEND_URL;
+    console.log("pegou env ", variable);
     await execa("git", ["checkout", "--orphan", "gh-pages"]);
 
     console.log("Building started...");
