@@ -6,10 +6,10 @@ import * as fs from "fs";
     await execa("git", ["checkout", "--orphan", "gh-pages"]);
 
     console.log("Building started...");
-    await execa("npm", ["run", "build", "--prefix", "frontend"]);
+    await execa("npm", ["run", "build"]);
 
     // Understand if it's dist or build folder
-    const folderPath = "./frontend/dist";
+    const folderPath = "./dist";
     if (!fs.existsSync(folderPath)) {
       process.exit(1);
     }
