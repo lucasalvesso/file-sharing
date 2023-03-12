@@ -1,8 +1,5 @@
 name: Deploy to Github Pages
 
-env:
-  VUE_APP_BACKEND_URL: 'teste'
-
 on:
   push:
     branches:
@@ -30,4 +27,4 @@ jobs:
           git config --global user.email $email
           git config --global user.name $username
       - name: Deploy
-        run: VUE_APP_BACKEND_URL=${{VUE_APP_BACKEND_URL}} npm run deploy:frontend
+        run: VUE_APP_BACKEND_URL=${{secrets.VUE_APP_BACKEND_URL}} npm run deploy:frontend
