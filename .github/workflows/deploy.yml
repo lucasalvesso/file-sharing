@@ -27,4 +27,4 @@ jobs:
           git config --global user.email $email
           git config --global user.name $username
       - name: Deploy
-        run: VUE_APP_BACKEND_URL=${{secrets.VUE_APP_BACKEND_URL}} npm run deploy:frontend
+        run: VUE_APP_BACKEND_URL=${{vars.VUE_APP_BACKEND_URL}} npm run deploy:frontend
